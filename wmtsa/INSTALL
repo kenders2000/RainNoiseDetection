@@ -1,0 +1,61 @@
+To Install WMTSA Wavelet Toolbox for MATLAB
+-------------------------------------------
+
+The archive package has subdirectories containing:
+
+    * WMTSA MATLAB toolbox root (./wmtsa)
+    * examples (./wmtsa/Examples)
+    * documentation (./wmtsa/doc)
+    * MUnit MATLAB toolbox (./munit/)
+    * Units tests (./wmtsa/Tools)
+
+To install the toolbox:
+
+   1. Download archive wmtsa-matlab-X.X.X.tar.gz or wmtsa-matlab-X.X.X.zip and move to location for unpacking: 
+      e.g. /tmp on UNIX/Linux, Desktop on Windows or MacOS X.
+   2. Unpack the archive to <unpack_directory>
+          * UNIX/Linux:  cd <unpack_directory>; gzip -d -c wmtsa-matlab-X.X.X.tar.gz | tar -xvf -
+          * WINDOWS:  Use WinZip or other utility to unzip wmtsa-matlab-X.X.X.tar.gz.
+          * MacOS X:  If enabled, Stuffit utility should automatically open and unpack the archive 
+            wmtsa-matlab-X.X.X.tar.gz  on the Desktop or other default location.
+          * Note: This will create a folder named 'wmtsa' and unpack ith archive in the same folder 
+            as the archive..
+   3. Copy the unpacked wmtsa toolbox subdirectories to the preferred toolbox installation location <installation_directory>.
+          * The subdirectories under wmtsa-matlab-X.X.X contains two directories, wmtsa and munit, 
+            that need to be copied to the the preferred toolbox directory.
+          * For a personal installation, install into ~/matlab/toolbox directory.
+                o Create personal matlab and toolbox diretories, if neccessary.
+                o mkdir ~/matlab
+                o mkdir ~/matlab/toolbox
+          * The toolboxes may be installed in locations elsewhere. Follow these installation 
+            instructions but install toolboxes to <installation_directory> , instead of ~/matlab/toolbox.  
+            For additional details on alternative or site installation, consult MATLAB documentation and your sys admin.
+          * UNIX/Linux
+                o cd <unpack_directory>
+                o cd wmtsa/toolbox
+                o cp -r wmtsa munit ~/matlab/toolbox          # Personal toolbox installation
+                o cp -r wmtsa munit <installaton_directory>   # Other location toolbox installation
+          * Windows
+                o Use File Manager open the toolbox subdirectory in wmtsa directory.   
+                  Copy and paste the wmtsa and munit subdirectories to personal toolbox directory.
+                o To determine your home directory for MATLAB, start MATLAB and at the command prompt 
+                  type: cd ~; pwd.  This will display your home directory.
+          * MacOS X
+                o Open the wmtsa folder, then the to the toolbox folder.
+                o Copy and paste the wmtsa and munit subdirectories in your personal toolbox directory:  ~/matllab/toolbox
+   4. Edit startup.m file to add WMTSA and MUnit toolboxes.
+          * For personal installation, the personal startup file is found at: ~/matlab/startup.m.  
+            If one does not exist, create one.
+          * To modify the site startup file. consult MATLAB documentation and your sys admin.
+          * Add the following lines to startup.m with full paths to wmtsa startup.m file and munit toolbox.
+            For example, if you have a personal toolbox (~/matlab/toolbox), add the following
+
+                o run ~/matlab/toolbox/wmtsa/startup.m     % Setup paths for wmtsa toolboxes and, 
+                                                           % if necessary,
+                                                           % compiles MEX function binary executables from C source files (modwtj.c, imodwtj.c, dwtj.c).
+                o addpath ~/matlab/toolbox/munit/munit     % Adds MUnit toolbox to path
+
+     See MATLAB documentation for configuring site toolboxes and
+     startup file.s
+
+

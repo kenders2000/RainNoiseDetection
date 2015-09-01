@@ -1,0 +1,690 @@
+2006-08-23  Charlie Cornish  <ccornish@atmos.washington.edu>
+	* Release WMTSA-matlab_Release_0-2-6_20060823
+
+	Minor Changes:
+	- Directory reorganization.
+	- Updated documentation for installation and readme.
+	- Fix minor typos.
+
+2006-05-01  Charlie Cornish  <ccornish@atmos.washington.edu>
+	* Release WMTSA-matlab_Release_0-2-5_20060501
+
+	Major Changes;
+	- Added stats toolbox, QChisq , QGauss functions.
+	- Add object model toolbox (@omodwt).
+
+2005-09-12  Charlie Cornish  <ccornish@atmos.washington.edu>
+	* Release WMTSA-matlab_Release_0-2-3_20050912
+
+        Major Changes:
+
+	- Added DWT transform.
+	- MODWT and DWT transforms and WVAR functions now handle
+	  multivariate datasets.
+	- By default, the wavelet transforms, when invoked with reflection
+	  boundary conditions, now return 2*N coefficients, where N is the
+	  length of the original time series for reasons cited below for
+	  use with wavelet variance estimators.
+	- Our ongoing research on the wavelet variance indicates that the
+	  the biased estimator of the wavelet variance using the forward
+	  and backward wavelet coefficients derived from wavelet
+	  transforms with reflection boundary conditions yields values
+	  closer the the true values than those obtained via unbiased
+	  estimators (forward and forward/backward versions).
+	- This release of the toolkit requires MATLAB version 7.0 or
+	  higher, incorporating changes in error handling and plotting
+	  that are incompatible with previous MATLAB versions.
+	- Example datasets have been moved into their own toolbox,
+	  in the toolbox wmtsa/data directory.
+	- Examples have been moved to the wmtsa/Examples directory, but
+	  are not in the executable path.
+	- All functions related to wavelet transforms (transforms,
+	  utilities, and plotting funcitons) have been moved to
+	  the wmtsa/dwt toolbox directory.
+
+
+2004-06-14  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Release WMTSA-matlab_Release_0-2-2_20040614
+
+        Major Changes:
+
+	- Due to a coding error, modwt reflection boundary conditions did not
+	  work properly and yielded same result a periodic.  Changes made
+	  for reflection bc's in modwt:  extend time series using
+	  reflection bc's, compute modwt, time align wavelet coefficients,
+	  truncate coefficients to length of original series, return
+	  truncated coefficients.  Notes:  1. This process will not yield the
+	  reconstituted time series exactly due to truncation.  2. Added Option
+	  in modwt function to return nontruncated coefficients. 3. For
+	  extremal phase (D class filters), advancement of time series for
+	  time alignment of coefficients not implemented except for Haar
+	  and D(4) filters.  Hence modwt using reflection bc's will not
+	  work for D filter >= 6.
+	- Added function: plot_modwt_coef2 plots modwt coefficients on
+	  individual plot axes (cf. stacked plots for plot_modwt_coef.)
+	- plot_wvar accepts a list (cell array) of wvar's so that mulitple
+	  wvar's may be plotted and overlayed, e.g. compare wvar results
+	  of a time series for different filters.
+	- Change modwt_wvar_psd: output arguments for f, f_band, CJ, CI_CJ
+	  are in order of increasing level j = decreasing values of f to
+	  keep the same indexing scheme of wvar and CJ by j.  User can
+	  flip f and CJ to get in traditional order of increasing f for
+	  comparisons to traditional PSD methods.
+	- Added munit, unit testing framework for MATLAB.  Unit tests using
+	  munit added for modwt, imodwt_mra, modwt_mra. Other functions
+	  yet to be done.
+	- Added plot_equivalent_filter to plot equivalent filter and its
+	  autocorrelation width for level range and filter.
+	- Added weakly biased estimator for wvar.
+	- Added modwt_mra to compute modwt multiresolution details and
+	  smooth coefficients directly (single function) from a time
+	  series.
+	- Added other D, LA and coiffet filters.
+
+2004-06-14 13:55  ccornish
+
+	* plotutils/plot_wvar_psd.m (1.3): Changes to wvar_psd (now in by
+	  increasing j, descreasing f) require sorting by inscreasing f.
+
+2004-06-14 12:05  ccornish
+
+	* plotutils/plot_wvar.m (1.15): Changed wvar and CI_wvar to vectors
+	  or cell arrays of vectors to allow plotting of multipe wvars.
+	  Added additional plotOpts.
+
+2004-06-14 12:02  ccornish
+
+	* plotutils/plot_wcov.m (1.10): Remove axis square.
+
+2004-06-14 12:01  ccornish
+
+	* plotutils/plot_filter_sgf.m (1.3): Add plotOpts argument.  Allow
+	  wavelet to be list of wavelist to plot multiple wavelets.
+
+2004-06-14 12:00  ccornish
+
+	* plotutils/plot_equivalent_filter.m (1.3): Add AxesProp argument.
+	  Changes to algorithm for scaling and placement of acw. Treat Haar
+	  as special case.
+
+2004-06-14 11:56  ccornish
+
+	* plotutils/overplot_modwt_cir_shift_coef_bdry.m (1.5): Add check
+	  for boundary values of NaN or outside domain of xaxis.
+
+2004-06-14 11:48  ccornish
+
+	* wmtsa/Test/: test_dwt.m (1.2), test_imodwt_mra.m (1.3),
+	  test_modwt_running_wvar.m (1.2), test_modwt_wvar.m (1.4),
+	  test_modwt_wvar_psd.m (1.2): Change paths to expected results
+	  files. Change boundary to periodic.
+
+2004-06-14 11:07  ccornish
+
+	* wmtsa/: dwt.m (1.1), modwt_mra.m (1.1): Initial revision.
+
+2004-06-14 11:05  ccornish
+
+	* wmtsa/: imodwt_mra.m (1.8), modwt_equivalent_filter.m (1.2):
+	  Documentation changes.
+
+2004-06-11 19:17  ccornish
+
+	* third-party/suptitle.m (1.3): Add Tag attribute.
+
+2004-06-11 19:16  ccornish
+
+	* utils/: MU_assert_fuzzy_diff.m (1.1), colorspecname2rgb.m (1.1),
+	  rgb2colorspecname.m (1.1): Initial revision.
+
+2004-06-11 19:13  ccornish
+
+	* utils/fuzzy_diff.m (1.7): shorten name to fuzzy_tol
+
+2004-06-11 18:57  ccornish
+
+	* wmtsa/Test/TestData/: RWV-LA8-ocean-shear-02.dat (1.2),
+	  RWV-LA8-ocean-shear-04.dat (1.2), RWV-LA8-ocean-shear-08.dat
+	  (1.2), RWV-LA8-ocean-shear-16.dat (1.2), SDF-D6-ocean-shear.dat
+	  (1.2), WV-D4-ocean-shear.dat (1.2), WV-D6-ocean-shear.dat (1.2),
+	  WV-Haar-ocean-shear.dat (1.2), WV-LA8-ocean-shear.dat (1.2),
+	  ecg-C6-DWT-MRA.dat (1.2), ecg-C6-DWT.dat (1.2),
+	  ecg-D4-DWT-MRA.dat (1.2), ecg-D4-DWT.dat (1.2),
+	  ecg-Haar-DWT-MRA.dat (1.2), ecg-Haar-DWT.dat (1.2),
+	  ecg-LA8-DWT-MRA-reflection.dat (1.2), ecg-LA8-DWT-MRA.dat (1.2),
+	  ecg-LA8-DWT-shifted-V_6.dat (1.2), ecg-LA8-DWT-shifted-W_1.dat
+	  (1.2), ecg-LA8-DWT-shifted-W_2.dat (1.2),
+	  ecg-LA8-DWT-shifted-W_3.dat (1.2), ecg-LA8-DWT-shifted-W_4.dat
+	  (1.2), ecg-LA8-DWT-shifted-W_5.dat (1.2),
+	  ecg-LA8-DWT-shifted-W_6.dat (1.2), ecg-LA8-DWT.dat (1.2),
+	  ecg-LA8-MODWT-MRA.dat (1.2), ecg-LA8-MODWT.dat (1.2): Moved to
+	  subdirectory.
+
+2004-06-11 18:49  ccornish
+
+	* wmtsa/Test/TestData/: WVAR/RWV-LA8-ocean-shear-02.dat (1.1),
+	  WVAR/RWV-LA8-ocean-shear-04.dat (1.1),
+	  WVAR/RWV-LA8-ocean-shear-08.dat (1.1),
+	  WVAR/RWV-LA8-ocean-shear-16.dat (1.1), WVAR/WV-D4-ocean-shear.dat
+	  (1.1), WVAR/WV-D6-ocean-shear.dat (1.1),
+	  WVAR/WV-Haar-ocean-shear.dat (1.1), WVAR/WV-LA8-ocean-shear.dat
+	  (1.1), barrow-spring.dat (1.1): Initial revision.
+
+2004-06-11 18:43  ccornish
+
+	* wmtsa/Test/TestData/: DWT/ecg-C6-DWT-MRA.dat (1.1),
+	  DWT/ecg-C6-DWT.dat (1.1), DWT/ecg-D4-DWT-MRA.dat (1.1),
+	  DWT/ecg-D4-DWT.dat (1.1), DWT/ecg-Haar-DWT-MRA.dat (1.1),
+	  DWT/ecg-Haar-DWT.dat (1.1), DWT/ecg-LA8-DWT-MRA-reflection.dat
+	  (1.1), DWT/ecg-LA8-DWT-MRA.dat (1.1),
+	  DWT/ecg-LA8-DWT-shifted-V_6.dat (1.1),
+	  DWT/ecg-LA8-DWT-shifted-W_1.dat (1.1),
+	  DWT/ecg-LA8-DWT-shifted-W_2.dat (1.1),
+	  DWT/ecg-LA8-DWT-shifted-W_3.dat (1.1),
+	  DWT/ecg-LA8-DWT-shifted-W_4.dat (1.1),
+	  DWT/ecg-LA8-DWT-shifted-W_5.dat (1.1),
+	  DWT/ecg-LA8-DWT-shifted-W_6.dat (1.1), DWT/ecg-LA8-DWT.dat (1.1),
+	  MODWT/barrow-spring-MODWT-haar-cirshifted.dat (1.1),
+	  MODWT/ecg-LA8-MODWT-MRA.dat (1.1), MODWT/ecg-LA8-MODWT.dat (1.1),
+	  SDF/SDF-D6-ocean-shear.dat (1.1): Initial revision.
+
+2004-06-11 18:32  ccornish
+
+	* wmtsa/Test/: dwt_filter_tcase.m (1.3),
+	  imodwt_mra_verification_tcase.m (1.2), imodwt_tcase.m (1.2),
+	  modwt_filter_tcase.m (1.3), modwt_functionality_tcase.m (1.3),
+	  modwt_mra_functionality_tcase.m (1.2),
+	  modwt_mra_verification_tcase.m (1.2), modwt_tsuite.m (1.3),
+	  modwt_verification_tcase.m (1.2): Update documenation and minor
+	  fixes.
+
+2004-06-11 18:31  ccornish
+
+	* wmtsa/Test/test_dwt.m (1.1): Initial revision.
+
+2004-06-11 18:30  ccornish
+
+	* wmtsa/Test/modwt_utils_tsuite.m (1.1): Initial revision
+
+2004-06-11 17:50  ccornish
+
+	* wmtsa/Test/test_modwt.m (1.4): Replaced with munit test case.
+
+2004-06-11 17:19  ccornish
+
+	* wmtsa/modwt_filter.m (1.9): Update documentation.
+
+2004-06-11 17:18  ccornish
+
+	* wmtsa/modwt_cir_shift_wcoef_bdry_indices.m (1.2): Fix typo.
+
+2004-06-11 17:17  ccornish
+
+	* wmtsa/modwt_cir_shift.m (1.5): Fix logic and initialization bugs.
+
+2004-06-11 17:16  ccornish
+
+	* wmtsa/modwt_choose_nlevels.m (1.5): Update error codes and
+	  documenation.
+
+2004-06-11 17:16  ccornish
+
+	* wmtsa/modwt.m (1.18): Update error codes; misc chances.
+
+2004-06-11 17:15  ccornish
+
+	* wmtsa/imodwt_mra.m (1.7): Update error codes and att.name.
+
+2004-06-11 17:14  ccornish
+
+	* wmtsa/dwt_filter.m (1.3): Update error codes and documentation.
+
+2004-06-11 17:13  ccornish
+
+	* wmtsa/dwt_equivalent_filter.m (1.2): Update documentaiton.
+
+2004-06-11 17:13  ccornish
+
+	* wmtsa/advance_wavelet_filter.m (1.7): Allow level to be a vector
+	  of levels.
+
+2004-06-11 17:12  ccornish
+
+	* wmtsa/advance_time_series_filter.m (1.6): Remove haar --
+	  calculated in scaling and wavelet adv functions; treate d4 as
+	  special case.
+
+2004-06-11 17:11  ccornish
+
+	* wmtsa/advance_scaling_filter.m (1.6): Treat haar filter as
+	  special case.  Allow level to be a vector of levels.
+
+2004-05-19 11:05  ccornish
+
+	* wmtsa/modwt_wvar_psd.m (1.3): Changed order of arguments CJ,
+	  CI_CJ, f and f_band to be same as 1:J0 so can index CJ with level
+	  (j); previously in reverse order (J0:1)
+
+2004-05-18 14:23  ccornish
+
+	* wmtsa/modwt_wvar_ci.m (1.5): Compute wvar and CI for levels with
+	  finite values for specified estimator; otherwise, set wvar and CI
+	  to NaN if not finite.
+
+2004-05-18 14:22  ccornish
+
+	* wmtsa/modwt_wvar.m (1.13): Added weaklybiased estimator.
+
+2004-05-03 19:33  ccornish
+
+	* wmtsa/modwt.m (1.17): Added opts input argument. Updated
+	  documentation. Added error checking.
+
+2004-05-03 19:33  ccornish
+
+	* wmtsa/imodwt.m (1.8): Updated documentation and variable names.
+	  Added error checking.
+
+2004-05-03 19:31  ccornish
+
+	* wmtsa/Test/imodwt_tcase.m (1.1): Initial revision
+
+2004-05-03 19:31  ccornish
+
+	* wmtsa/Test/modwt_tsuite.m (1.2): Added tests
+
+2004-04-30 13:20  ccornish
+
+	* plotutils/plot_modwt_coef.m (1.15): For VJ0 label Use prime
+	  instead of -<>
+
+2004-04-30 00:32  ccornish
+
+	* wmtsa/Test/: imodwt_mra_verification_tcase.m (1.1),
+	  modwt_mra_functionality_tcase.m (1.1),
+	  modwt_mra_verification_tcase.m (1.1), modwt_tsuite.m (1.1),
+	  modwt_verification_tcase.m (1.1): Initial revision.
+
+2004-04-30 00:29  ccornish
+
+	* wmtsa/Test/modwt_functionality_tcase.m (1.2): Change function to
+	  MU_tcase_new. Added test no_wavelet
+
+2004-04-30 00:27  ccornish
+
+	* wmtsa/Test/: dwt_filter_tcase.m (1.2), modwt_filter_tcase.m
+	  (1.2): Change function to MU_tcase_new.
+
+2004-04-29 17:58  ccornish
+
+	* utils/: flipvec.m (1.1), isvector.m (1.1), Test/flipvec_tcase.m
+	  (1.1), Test/isvector_tcase.m (1.1), Test/nargerr_tcase.m (1.1),
+	  Test/utils_tsuite.m (1.1): Initial revision.
+
+2004-04-29 17:57  ccornish
+
+	* utils/nargerr.m (1.3): changed argument names for clarity; add
+	  mode argument.
+
+2004-04-29 17:57  ccornish
+
+	* utils/argterr.m (1.4): Added output argument errmsg.
+
+2004-04-26 19:38  ccornish
+
+	* wmtsa/Test/: dwt_filter_tcase.m (1.1), modwt_filter_tcase.m
+	  (1.1), modwt_functionality_tcase.m (1.1), test_modwt.m (1.3):
+	  Initial revision.
+
+2004-04-07 13:10  ccornish
+
+	* wmtsa/: imodwt_details.m (1.9), imodwt_smooth.m (1.7): Corrected
+	  documentation.
+
+2004-03-17 18:17  ccornish
+
+	* wmtsa/: advance_scaling_filter.m (1.5), advance_wavelet_filter.m
+	  (1.6): Fix doc errors.
+
+2004-03-17 18:17  ccornish
+
+	* wmtsa/advance_time_series_filter.m (1.5): Added logic for
+	  Extremal Phase, Best Localized and Coiflet fitlers. Added
+	  internal functions. Doc cleanup.
+
+2004-03-17 18:15  ccornish
+
+	* wmtsa/modwtj.c (1.3): Change API - pass scalers by value instead
+	  of by reference. Code cleanup.
+
+2004-03-17 18:12  ccornish
+
+	* wmtsa/modwt.m (1.16): Changes to documenation, error codes.
+
+2004-03-17 18:12  ccornish
+
+	* wmtsa/dwt_filter.m (1.2): Added other D, LA and coiffet filters.
+
+2004-03-17 18:09  ccornish
+
+	* plotutils/plot_wvar_psd.m (1.2): Added input arg axesProp
+
+2004-03-17 18:08  ccornish
+
+	* plotutils/plot_modwt_coef2.m (1.2): Changes to text positioning
+	  for labels.
+
+2004-03-17 18:08  ccornish
+
+	* plotutils/plot_equivalent_filter.m (1.2): Added input arg
+	  title_str. Added default plot options. Logic and option changes.
+
+2004-03-17 18:06  ccornish
+
+	* plotutils/multi_yoffset_plot.m (1.8): Typo fix.
+
+2004-03-17 18:04  ccornish
+
+	* utils/argterr.m (1.3): Added optional input parameter to check
+	  arg size. Added struct and char/string types. Changes to error
+	  messages.
+
+2004-03-17 18:00  ccornish
+
+	* wmtsa/equivalent_filter_width.m (1.3),
+	  wmtsa/filter_autocorrelation_width.m (1.1),
+	  wmtsa/dwt_equivalent_filter.m (1.1),
+	  wmtsa/modwt_equivalent_filter.m (1.1),
+	  plotutils/plot_dwt_vector.m (1.1): Initial revision.
+
+2004-03-17 17:57  ccornish
+
+	* plotutils/: plot_modwt_coef.m (1.14), plot_wvar.m (1.14): Minor
+	  fixes.
+
+2004-03-17 17:55  ccornish
+
+	* wmtsa/modwt_wcor.m (1.7): Calculate CI only if requested, i.e.
+	  nargout > 1.
+
+2004-03-17 17:54  ccornish
+
+	* wmtsa/modwt_wcov.m (1.10): Calculate CI and VARgamma only if
+	  requested, i.e. nargout > 1.
+
+2004-03-17 17:51  ccornish
+
+	* plotutils/plot_filter_sgf.m (1.2): Added input arg: title_str;
+	  added output arg for handle axes.
+
+2004-03-17 17:50  ccornish
+
+	* wmtsa/modwt_filter.m (1.8): Cleanup code and documentation.
+
+2004-02-18 11:26  ccornish
+
+	* plotutils/plot_modwt_coef2.m (1.1): Initial revsion.
+
+2004-02-18 11:25  ccornish
+
+	* plotutils/plot_modwt_coef.m (1.13): Documentation changes.
+
+2004-02-18 10:53  ccornish
+
+	* plotutils/plot_modwt_coef.m (1.12): Added SubtractMeanVJ0t
+	  option, with default = 1 (yes).
+
+2004-02-18 10:27  ccornish
+
+	* plotutils/plot_equivalent_filter.m (1.1): Initial revision.
+
+2004-02-05 11:23  ccornish
+
+	* plotutils/plot_wcov.m (1.9): API change:  Reverse argument order
+	  to title_str and ylabel_str for consistency with other functions.
+	  Dropped scale_str argument.  Added axesProp, level_range,
+	  plotOpts arguments. Updated documentation.
+
+2004-02-05 11:12  ccornish
+
+	* plotutils/plot_wvar.m (1.13): Clean up unused variables.  Updated
+	  documentation.
+
+2004-02-04 15:02  ccornish
+
+	* plotutils/set_axes_prop.m (1.1): Initial revision.
+
+2004-02-04 14:48  ccornish
+
+	* plotutils/plot_wvar.m (1.12): API change:  Reverse argument order
+	  to title_str and ylabel_str for consistency with other functions.
+	  Dropped scale_str argument.  Added  axesProp, level_range,
+	  plotOpts arguments.  Secondary scale axis now based on values of
+	  plotOpts.DeltaT and min/max of axis.	Added axesProp for user
+	  control of axes plotting.
+
+2004-01-07 14:25  ccornish
+
+	* wmtsa/Test/TestData/ecg-C6-DWT.dat (1.1): Initial revision.
+
+2004-01-05 14:05  ccornish
+
+	* wmtsa/Test/TestData/: ecg-C6-DWT-MRA.dat (1.1),
+	  ecg-D4-DWT-MRA.dat (1.1), ecg-D4-DWT.dat (1.1),
+	  ecg-Haar-DWT-MRA.dat (1.1), ecg-Haar-DWT.dat (1.1),
+	  ecg-LA8-DWT-MRA-reflection.dat (1.1), ecg-LA8-DWT-MRA.dat (1.1),
+	  ecg-LA8-DWT-shifted-V_6.dat (1.1), ecg-LA8-DWT-shifted-W_1.dat
+	  (1.1), ecg-LA8-DWT-shifted-W_2.dat (1.1),
+	  ecg-LA8-DWT-shifted-W_3.dat (1.1), ecg-LA8-DWT-shifted-W_4.dat
+	  (1.1), ecg-LA8-DWT-shifted-W_5.dat (1.1),
+	  ecg-LA8-DWT-shifted-W_6.dat (1.1), ecg-LA8-DWT.dat (1.1): Initial
+	  revision.
+
+2003-12-16  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Release WMTSA-matlab_Release_0-2-1_20031216
+
+2003-12-16 19:01  ccornish
+
+	* plotutils/figure_footer.m (1.5): Fix bug - type error.
+
+2003-12-16 18:55  ccornish
+
+	* utils/fuzzy_diff.m (1.6): Fixed fuzzy difference comparision to
+	  inequality.
+
+2003-12-16 18:53  ccornish
+
+	* utils/: argterr.m (1.2), nargerr.m (1.2), infomsg.m (1.5),
+	  set_infomsg_verbosity_level.m (1.4): Updated to RoboDoc compliant
+	  header.
+
+2003-12-16 18:32  ccornish
+
+	* plotutils/: plot_wcov.m (1.8), plot_wvar.m (1.11): Added input
+	  argument scale_str.
+
+2003-12-16 18:28  ccornish
+
+	* plotutils/: plot_cum_wcov.m (1.3), plot_imodwt_mra.m (1.11),
+	  plot_modwt_clcwsvar.m (1.3), plot_modwt_rcwsvar.m (1.4),
+	  plot_modwt_wvar_ci_comparison.m (1.3), plot_wcor.m (1.5): Updated
+	  to RoboDoc compliant header.
+
+2003-12-16 18:27  ccornish
+
+	* plotutils/overplot_modwt_cir_shift_coef_bdry.m (1.4): Updated to
+	  RoboDoc compliant header; Changed to updated names for function
+	  calls.
+
+2003-12-16 18:26  ccornish
+
+	* plotutils/multi_yoffset_plot.m (1.7): Add input function argument
+	  left_ylabel_str.
+
+2003-12-16 18:25  ccornish
+
+	* plotutils/: figure_datestamp.m (1.3), figure_footer.m (1.4),
+	  linesegment_plot.m (1.3): Updated to RoboDoc compliant header;
+	  Changed graphic handles to standard names.
+
+2003-12-16 17:22  ccornish
+
+	* wmtsa/modwt_wvar_psd.m (1.2): Changed order of output arguments.
+
+2003-12-16 17:20  ccornish
+
+	* wmtsa/Test/test_modwt_wvar.m (1.3): Updated test driver for
+	  changes in modwt_wvar api.
+
+2003-12-16 17:19  ccornish
+
+	* wmtsa/Test/: test_modwt_wvar_psd.m (1.1), test_modwt_wvar_sdf.m
+	  (1.2): Renamed test_modwt_wvar_sdf.m to test_modwt_wvar_psd.m.
+
+2003-12-15 17:22  ccornish
+
+	* wmtsa/: modwt_cir_shift_wavelet_coef_bdry_indices.m (1.5),
+	  modwt_cir_shift_wcoef_bdry_indices.m (1.1): Renamed
+	  modwt_cir_shift_wavelet_coef_bdry_indices.m to
+	  modwt_cir_shift_wcoef_bdry_indices.m
+
+2003-12-15 17:19  ccornish
+
+	* wmtsa/: modwt_cir_shift_wavelet_coef_bdry.m (1.6),
+	  modwt_cir_shift_wcoef_bdry.m (1.1): Renamed
+	  modwt_cir_shift_wavelet_coef_bdry.m to
+	  modwt_cir_shift_wcoef_bdry.m
+
+2003-12-16  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Added functions for estimating and plotting power spectral
+	density from wavelet variance.
+	
+2003-11-05  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Added ROBOdoc documentation headers.
+	* Added test drivers.
+	* Added a make function to compile, clean, and remake mex files.
+	* Added figures and example data.
+	* Added utlity functions for modwt, wdwt and wmtsa.
+	
+2003-06-24  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Release WMTSA-matlab_Release-0-1-1_20030624.
+
+2003-06-24  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Added toolbox/wmtsa/utils/nargerr.m to replace MATLAB wavelet
+	toolkit function errargn.
+	* Added toolbox/wmtsa/utils/argterr.m to replace MATLAB wavelet
+	toolkit function errargt.
+	* Replaced calls to errargn and errargt in functions within wmtsa
+	toolbox.
+
+2003-06-24  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Changed  plot_modwt_coef.m: added plotOpts and masterPlotFrame
+	arguments to function call.
+	
+2003-06-24  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Added toolbox/wmtsa/wmtsa/modwt_cum_level_wcov.m.
+	
+2003-06-04  Charlie Cornish  <ccornish@atmos.washington.edu>
+
+	* Initial Release (0.1)
+
+	File Inventory:
+
+	./matlab:
+	README.txt
+	
+	./matlab/examples/data:
+	ecg-LA8-MODWT.dat
+	ecg-LA8-MODWT-MRA.dat
+	heart.dat
+	msp-data-4096.dat
+	msp-data.dat
+	Nile.dat
+	percival-m_subtidal_sea_level.dat
+	
+	./matlab/examples/Figures:
+	figure183.m
+	figure184.m
+	figure186.m
+	figure187.m
+	figure190.m
+	figure194.m
+	figure195.m
+	
+	./matlab/toolbox/wmtsa:
+	startup.m
+	
+	./matlab/toolbox/wmtsa/plotutils:
+	figure_datestamp.m
+	figure_footer.m
+	linesegment_plot.m
+	multi_yoffset_plot.m
+	overplot_imodwt_cir_mra_bdry.m
+	overplot_modwt_cir_shift_coef_bdry.m
+	plot_cum_wcov.m
+	plot_imodwt_mra.m
+	plot_modwt_clcwsvar.m
+	plot_modwt_coef.m
+	plot_modwt_cwsvar.m
+	plot_modwt_rcwsvar.m
+	plot_modwt_wvar_ci_comparison.m
+	plot_wcor.m
+	plot_wcov.m
+	plot_wvar.m
+	
+	./matlab/toolbox/wmtsa/third-party:
+	suptitle.m
+	
+	./matlab/toolbox/wmtsa/utils:
+	fuzzy_diff.m
+	infomsg.m
+	set_infomsg_verbosity_level.m
+	
+	./matlab/toolbox/wmtsa/wmtsa:
+	advance_scaling_filter.m
+	advance_time_series_filter.m
+	advance_wavelet_filter.m
+	equivalent_filter_width.m
+	imodwt_details.m
+	imodwtj.c
+	imodwtj.mexglx*
+	imodwtj.mexsol*
+	imodwt.m
+	imodwt_mra.m
+	imodwt_smooth.m
+	modwt_choose_nlevels.m
+	modwt_circular_advance.m
+	modwt_cir_mra_bdry_indices.m
+	modwt_cir_mra_bdry.m
+	modwt_cir_shift_scaling_coef_bdry_indices.m
+	modwt_cir_shift_scaling_coef_bdry.m
+	modwt_cir_shift_wavelet_coef_bdry_indices.m
+	modwt_cir_shift_wavelet_coef_bdry.m
+	modwt_cum_level_cum_wav_svar.m
+	modwt_cum_wav_svar.m
+	modwtj.c
+	modwtj.mexglx*
+	modwtj.mexsol*
+	modwt.m
+	modwt_number_nonboundary_coef.m
+	modwt_plot_comparison_wvar_ci.m
+	modwt_rot_cum_wav_svar.m
+	modwt_scaling_coef.m
+	modwt_wavelet_coef.m
+	modwt_wavelet_sample_variance.m
+	modwt_wcor.m
+	modwt_wcov.m
+	modwt_wvar.m
+	ts_sample_variance.m
+	wmtsa_wavelet_filter.m
+
+	
+

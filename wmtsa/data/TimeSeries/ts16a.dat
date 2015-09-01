@@ -1,0 +1,20 @@
+% 16pt time series in left-hand plot of Figure 42
+% N = 16
+% Note: Left and right hand series differ at 13th value, X_2,13 = -X_1,13
+ 0.2
+-0.4
+-0.6
+-0.5
+-0.8
+-0.4
+-0.9
+ 0.0
+-0.2
+ 0.1
+-0.1
+ 0.1
+ 0.7
+ 0.9
+ 0.0
+ 0.3
+

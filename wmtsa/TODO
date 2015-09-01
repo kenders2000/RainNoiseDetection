@@ -1,0 +1,13 @@
+Features to be added in future versions of the
+WMTSA wavelet toolkit for MATLAB.
+
+  - Implement inverse DWT wavelet transform.
+  - Implment packet versions of DWT and MODWT transforms.
+  - Implement additional plotting and other utility functions.
+  - Add scripts to replicate other figures from WMTSA.
+  - Add other examples.
+  - Write additional documentation about using the toolkit.
+  - Add a tutorial.
+  - Add additional test drivers.
+
+
