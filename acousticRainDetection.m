@@ -35,7 +35,10 @@ NN=0;
 close all
   for i=1:length(fileNameCells)
 str=fileNameCells{i};
-  [siz Fs1]=wavread(str,'SIZ');
+%   [siz Fs1]=audioread(str,'SIZ');
+  INFO = audioinfo(str);
+  Fs1=INFO.SampleRate;
+  siz=INFO.TotalSamples;
         N=floor(siz(1)/(10*Fs1));
 
 %         clear rainYN
@@ -46,7 +49,7 @@ str=fileNameCells{i};
                 i=n+n1;
                 if (i)>(N-1) break; end
                 N1=(i-1)*10*Fs1+1;
-                [y Fs1]=wavread(str,[N1 N1+10*Fs1]);
+                [y Fs1]=audioread(str,[N1 N1+10*Fs1]);
                 y=sum(y,2);
                 y=resample(y,Fs,Fs1);
                 wavwrite(y,Fs,16,[num2str(n1+1) '.wav']);

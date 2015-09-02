@@ -10,7 +10,7 @@ This algorithm is designed to detect rain-fall noise in 10 s chunks, the resulti
 An example of the usage is presented in TestRainDet.m, if you run this script it will process the data from two example files of outdoor recordings, where initially there is no rain and then rain starts about 15 minutes into the recording, the recording consists of two wav files, which represent a contiguous recording.  The main function is contained in the script acousticRainDetection.m, the output of the function is as follows where the rain is detected as a value between 0 and 1, where 1 is certain rainfall and 0 is certain rain free.
 
 Inline-style: 
-![Rain detection example](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Rain detection example")
+![Rain detection example](example.png "Rain detection example")
 
 
 
