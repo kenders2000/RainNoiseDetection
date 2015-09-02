@@ -1,4 +1,4 @@
-function [rainYN]=featuresFinal(y,Fs)
+function [vote]=featuresFinal(y,Fs,data)
 % Ffrom=1400;
 % Fto=15000;
 % yold=y;
@@ -72,5 +72,7 @@ features=[HistimpZ(115) WPD_E(288) WPD_E(779) WPD_E(993) M...
 % features=[HistimpZ(117) WPD_E(912) WPD_E(795) HistimpZ(54)  LZmax_imp ...
 %     WPD_E(648)   WPD_E(798) HistimpZ(63) WPD_E(49) HistimpZ(192) HistimpZ(51) HistimpZ(165) ...
 %     HistimpZ(47 ) HistimpZ(175) HistimpZ(52)];
-load trainedalgo3 b;
-rainYN=str2num(cell2mat(predict(b,features)));
+% load trainedalgo3 b;
+% rainYN=str2num(cell2mat(predict(b,features)));
+[vote]=randForest(features,data);
+
