@@ -1,5 +1,9 @@
 # RainNoiseDetection
-Algorithm for automatically detecting Outdoor Rain-fall noise in soundscapes - specifically intended for data-filtering in bio-acoustics
+Algorithm for automatically detecting Outdoor Rain-fall noise in soundscapes - intended for data-filtering in bio-acoustics, but may have other uses.
+
+This function is free to use and modify, if you do use it in could you kindly provide an acknowledgement in the form of a citation:
+
+Paul Kendrick - TBC
 
 This algorithm is designed to detect rain-fall noise in 10 s chunks, the resulting detection is then averaged over 5 minute periods.  The function is written in Matlab and the usage is as follows;
 
